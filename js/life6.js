@@ -18,6 +18,9 @@ class Cell {
         ctx.fillStyle = this.alive ? "yellow" : "grey"
         ctx.fillRect(this.x, this.y, this.w, this.h)
     }
+    containsPoint(pointerX, pointerY) {
+        return  (this.x <= pointerX) && (this.x + this.w >= pointerX) && (this.y <= pointerY) && (this.y + this.h >= pointerY)
+    }
 }
 
 class CellService {
@@ -37,6 +40,20 @@ class CellService {
                 this.cells[id] = cell
             }
         }
+        const state = this
+        this.canvas.addEventListener("mousedown", function(e) {
+            const pointerX = e.pageX - 10
+            const pointerY = e.pageY - 10
+            let cells = state.cells
+            for (let cellId in cells) {
+                if (cells[cellId].containsPoint(pointerX, pointerY)) {
+                    let cell = cells[cellId]
+                    cell.alive = !cell.alive
+                    cell.draw(state.ctx)
+                    return
+                }
+            }
+        }, true)
     }
     summon (cellId) {
         let cell = this.cells[cellId]
@@ -51,7 +68,7 @@ class CellService {
     playTick () {
         let cellsToKill = []
         let cellsToSummon = []
-        for (const cellId in this.cells) {
+        for (let cellId in this.cells) {
             let x = parseInt(cellId.substring(0, cellId.indexOf("_")))
             let y = parseInt(cellId.substring(cellId.indexOf("_")+1))
             let neighborCount = 0
