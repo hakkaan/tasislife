@@ -162,6 +162,49 @@ function summon(type) {
         canvas.summon("21_17")
         canvas.summon("22_18")
     }
+    if (type === "cgg") {    
+        canvas.summon("20_18")
+        canvas.summon("21_18")
+        canvas.summon("20_19")
+        canvas.summon("21_19")
+
+        canvas.summon("28_19")
+        canvas.summon("28_20")
+        canvas.summon("29_18")
+        canvas.summon("29_20")
+        canvas.summon("30_18")
+        canvas.summon("30_19")
+
+        canvas.summon("36_20")
+        canvas.summon("36_21")
+        canvas.summon("36_22")
+        canvas.summon("37_20")
+        canvas.summon("38_21")
+
+        canvas.summon("42_17")
+        canvas.summon("42_18")
+        canvas.summon("43_16")
+        canvas.summon("43_18")
+        canvas.summon("44_16")
+        canvas.summon("44_17")
+
+        canvas.summon("44_28")
+        canvas.summon("44_29")
+        canvas.summon("45_28")
+        canvas.summon("45_30")
+        canvas.summon("46_28")
+
+        canvas.summon("54_16")
+        canvas.summon("54_17")
+        canvas.summon("55_16")
+        canvas.summon("55_17")
+
+        canvas.summon("55_23")
+        canvas.summon("55_24")
+        canvas.summon("55_25")
+        canvas.summon("56_23")
+        canvas.summon("57_24")
+    }
 }
 
 function clearOnLoad() {
