@@ -29,8 +29,8 @@ class CellService {
         this.cells = {}
     }
     initialize () {
-        for (let z = 0; z < 50; z++){
-            for (let i = 0; i < 50; i++) {
+        for (let z = 0; z < this.height/10; z++){
+            for (let i = 0; i < this.width/10; i++) {
                 let id = i + "_" + z
                 let cell = new Cell(id, i*10, z*10, 9, 9, false)
                 cell.draw(this.ctx)
@@ -62,7 +62,7 @@ class CellService {
                     }
                     let nx = x-k
                     let ny = y-v
-                    if (nx > -1 && ny > -1 && nx < 50 && ny < 50) {
+                    if (nx > -1 && ny > -1 && nx < this.width/10 && ny < this.height/10) {
                         let nid = nx + "_" + ny
                         let neighbor = this.cells[nid]
                         if (neighbor.alive) {
@@ -82,21 +82,15 @@ class CellService {
                 }
             }
         }
-        if (cellsToKill.length > 0) {
-            console.log(cellsToKill)
-            for (const cellId of cellsToKill) {
-                let cell2 = this.cells[cellId]
-                cell2.alive = false
-                cell2.draw(this.ctx)
-            }
+        for (const cellId of cellsToKill) {
+            let cell = this.cells[cellId]
+            cell.alive = false
+            cell.draw(this.ctx)
         }
-        if (cellsToSummon.length > 0) {
-            console.log(cellsToSummon)
-            for (const cellId of cellsToSummon) {
-                let cell = this.cells[cellId]
-                cell.alive = true
-                cell.draw(this.ctx)
-            }
+        for (const cellId of cellsToSummon) {
+            let cell = this.cells[cellId]
+            cell.alive = true
+            cell.draw(this.ctx)
         }
     }
 }
@@ -117,6 +111,10 @@ function init(speed) {
 }
 
 function summon(type) {
+    if (ticker) {
+        clearInterval(ticker)
+        ticker = null
+    }
     canvas = new CellService(document.getElementById("canvas"))
     canvas.initialize()
     if (type === "diehard") {    
@@ -128,4 +126,41 @@ function summon(type) {
         canvas.summon("42_16")
         canvas.summon("41_14")
     }
+    if (type === "bar") {    
+        canvas.summon("25_15")
+        canvas.summon("25_16")
+        canvas.summon("25_17")
+        canvas.summon("25_18")
+        canvas.summon("25_19")
+        canvas.summon("25_20")
+        canvas.summon("25_21")
+        canvas.summon("25_22")
+        canvas.summon("25_23")
+        canvas.summon("25_24")
+    }
+    if (type === "glider") {    
+        canvas.summon("20_19")
+        canvas.summon("21_19")
+        canvas.summon("22_19")
+        canvas.summon("21_17")
+        canvas.summon("22_18")
+    }
+}
+
+function clearOnLoad() {
+    if (ticker) {
+        clearInterval(ticker)
+        ticker = null
+    }
+    canvas = new CellService(document.getElementById("canvas"))
+    canvas.initialize()
+}
+
+function clear2() {
+    if (ticker) {
+        clearInterval(ticker)
+        ticker = null
+    }
+    canvas = new CellService(document.getElementById("canvas"))
+    canvas.initialize()
 }

@@ -3,11 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Tasis Life</title>
-        <script src="life6.js"></script>
+        <script src="js/life6.js"></script>
     </head>
-    <body>
-        <canvas id="canvas" width="500" height="500" style="background-color:black"></canvas>
+    <body onload="clearOnLoad()">
+        <canvas id="canvas" width="800" height="600" style="background-color:black"></canvas>
         <div>
+            <p>
+                First choose a creature and then click start.
+            </p>
             <p>
                 <input type="button" onclick="init(100)" value="Start (100ms)"></input>
                 <input type="button" onclick="init(300)" value="Start (300ms)"></input>
@@ -15,9 +18,17 @@
                 <input type="button" onclick="init(1200)" value="Start (1200ms)"></input>
             </p>
             <p>
-                Summon creatures:
+                Summon creatures: <br>
                 <input type="button" onclick="summon('diehard')" value="Die hard Methuselah"></input>
+                <input type="button" onclick="summon('bar')" value="Simple row"></input>
+                <input type="button" onclick="summon('glider')" value="Glider"></input>
             </p>
+            <p>
+                <input type="button" onclick="clear2()" value="Clear"></input>
+            </p>
+            <p>
+                <a href="https://en.wikipedia.org/wiki/Game_of_Life" target="_blank">See Conway's Game of Life</a>
+            </p>            
         </div>
     </body>
 </html>
