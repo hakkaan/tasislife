@@ -100,14 +100,10 @@ class CellService {
             }
         }
         for (const cellId of cellsToKill) {
-            let cell = this.cells[cellId]
-            cell.alive = false
-            cell.draw(this.ctx)
+            this.kill(cellId)
         }
         for (const cellId of cellsToSummon) {
-            let cell = this.cells[cellId]
-            cell.alive = true
-            cell.draw(this.ctx)
+            this.summon(cellId)
         }
     }
 }
