@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tasis Life</title>
+        <script src="life6.js"></script>
+    </head>
+    <body>
+        <canvas id="canvas" width="500" height="500" style="background-color:black"></canvas>
+        <div>
+            <p>
+                <input type="button" onclick="init(100)" value="Start (100ms)"></input>
+                <input type="button" onclick="init(300)" value="Start (300ms)"></input>
+                <input type="button" onclick="init(600)" value="Start (600ms)"></input>
+                <input type="button" onclick="init(1200)" value="Start (1200ms)"></input>
+            </p>
+            <p>
+                Summon creatures:
+                <input type="button" onclick="summon('diehard')" value="Die hard Methuselah"></input>
+            </p>
+        </div>
+    </body>
+</html>
