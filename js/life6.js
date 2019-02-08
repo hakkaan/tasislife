@@ -5,6 +5,9 @@
     4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 */
 
+var canvas = null
+var ticker = null
+
 class Cell {
     constructor (id, x, y, w, h, alive) {
         this.id = id
@@ -30,6 +33,7 @@ class CellService {
         this.height = canvas.height
         this.ctx = canvas.getContext("2d")
         this.cells = {}
+        this.tickCount = 0
     }
     initialize () {
         for (let z = 0; z < this.height/10; z++){
@@ -65,9 +69,20 @@ class CellService {
         cell.alive = false
         cell.draw(this.ctx)
     }
+    stop () {
+        if (ticker) {
+            clearInterval(ticker)
+            ticker = null
+        }
+    }
+    setTickCount () {
+        this.tickCount += 1
+        document.getElementById("tickCount").innerHTML = this.tickCount
+    }
     playTick () {
         let cellsToKill = []
         let cellsToSummon = []
+        
         for (let cellId in this.cells) {
             let x = parseInt(cellId.substring(0, cellId.indexOf("_")))
             let y = parseInt(cellId.substring(cellId.indexOf("_")+1))
@@ -99,17 +114,21 @@ class CellService {
                 }
             }
         }
+
+        if (cellsToKill.length < 1 && cellsToSummon.length < 1) {
+            this.stop()
+            return
+        }
+
         for (const cellId of cellsToKill) {
             this.kill(cellId)
         }
         for (const cellId of cellsToSummon) {
             this.summon(cellId)
         }
+        this.setTickCount()
     }
 }
-
-var canvas = null
-var ticker = null
 
 function init(speed) {
     if (canvas) {
